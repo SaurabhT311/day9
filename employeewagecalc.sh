@@ -1,3 +1,4 @@
+  
 #!/bin/bash -x
 
 #CONSTANTS
@@ -7,26 +8,21 @@ salary=0
 RATE_PER_HR=20
 MAX_WORKING_DAYS=20;
 MAX_WORKING_HRS=100;
-
-
 #VARIABLES
 totalWorkingDays=1;
 totalWorkingHrs=0;
+
+declare -A dailyWageDic
 
 function getWorkingHrs()
 {
         case $empCheck in
                 $IS_FULL_TIME)
-                empHrs=8
-                ;;
-                $IS_PART_TIME)
-
-                empHrs=4
-                ;;
+                empHrs=8 ;;
+				$IS_PART_TIME)
+                empHrs=4 ;;
                 *)
-
-                empHrs=0
-                ;;
+                empHrs=0 ;;
         esac
         echo $empHrs
 }
@@ -37,13 +33,12 @@ do
         empCheck=$((RANDOM%3))
         empHrs="$(getWorkingHrs $empCheck)"
         dailyWage=$(($empHrs*$RATE_PER_HR))
-        echo "Day"
-        dailyWageArray[$totalWorkingDays]=$dailyWage
-        totalWorkingHrs=$(( $totalWorkingHrs+$empHrs ))
-
+        dailyWageDic["Day"$totalWorkingDays]=$dailyWage
+		totalWorkingHrs=$(( $totalWorkingHrs+$empHrs ))
 done
-totalSalary=$(($totalWorkingHrs*$RATE_PER_HR ))
-echo "Array elements" ${dailyWageArray[@]}
-echo "Index" ${!dailyWageArray[@]}
+
+totalSalary=$(( $totalWorkingHrs*$RATE_PER_HR ))
 
 echo "Employee wage per month:" $totalSalary
+echo "Array elements" ${dailyWageDic[@]}
+echo "Index" ${!dailyWageDic[@]}
