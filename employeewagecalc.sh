@@ -1,11 +1,20 @@
 #!/bin/bash -x
-echo "Welcome To employee Wage Computation"
+randomCheck=$((RANDOM%3))
+isFullTime=1
+isPartTime=2
+salary=0
+ratePerHr=20
 
-attendance=$(( RANDOM%2 ))
 
-if [ $attendance -eq 0 ]
+if [ $isFullTime -eq $randomCheck ]
 then
-        echo "Employee is Present"
+        numOfworkingHrs=8
+elif [ $isPartTime -eq $randomCheck ]
+then
+        numOfworkingHrs=4
 else
-        echo "Employee is Absent"
+        numOfworkingHrs=0
 fi
+
+salary=$(( $ratePerHr*$numOfworkingHrs ))
+echo "Employee wage:" $salar
