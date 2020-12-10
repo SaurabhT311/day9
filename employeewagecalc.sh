@@ -12,7 +12,6 @@ MAX_WORKING_HRS=60;
 totalWorkingDays=1;
 totalWorkingHrs=0;
 
-
 while [[ $totalWorkingHrs -lt $MAX_WORKING_HRS && $totalWorkingDays -lt $MAX_WORKING_DAYS ]]
 do
         ((totalWorkingDays++))
@@ -35,4 +34,34 @@ totalWorkingHrs=$(($totalWorkingHrs+$empHrs))
 done
 
 totalSalary=$(($totalWorkingHrs*$RATE_PER_HR ))
+
+function getWorkingHrs()
+{
+        case $1 in
+                $IS_FULL_TIME)
+                empHrs=8
+                ;;
+                $IS_PART_TIME)
+
+                empHrs=4
+                ;;
+                *)
+
+                empHrs=0
+                ;;
+        esac
+        echo $empHrs
+}
+
+while [[ $totalWorkingHrs -lt $MAX_WORKING_HRS && $totalWorkingDays -lt $MAX_WORKING_DAYS ]]
+do
+        ((totalWorkingDays++))
+        empCheck=$((RANDOM%3))
+        empHrs="$getWorkingHrs $empCheck "
+        totalWorkingHrs=$(( $totalWorkingHrs+$empHrs ))
+
+done
+totalSalary=$(($totalWorkingHrs*$RATE_PER_HR ))
+
+
 echo "Employee wage per month:" $totalSalary
