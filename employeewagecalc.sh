@@ -1,24 +1,38 @@
 #!/bin/bash -x
 
-empCheck=$((RANDOM%3))
-isFullTime=1
-isPartTime=2
+#CONSTANTS
+IS_FULL_TIME=1
+IS_PART_TIME=2
 salary=0
-ratePerHr=20
-case $empCheck in
-        $isFullTime)
-        echo "FullTime Employee"
-        empHrs=8
-        ;;
-        $isPartTime)
-        echo "PartTime Employee"
-        empHrs=4
-        ;;
-        *)
-        echo "Employee is Absent"
-        empHrs=0
-        ;;
-esac
+RATE_PER_HR=20
+MAX_WORKING_DAYS=20;
+MAX_WORKING_HRS=60;
 
-salary=$(( $ratePerHr*$empHrs ))
-echo "Employee wage:" $salary
+#VARIABLES
+totalWorkingDays=1;
+totalWorkingHrs=0;
+
+
+while [[ $totalWorkingHrs -lt $MAX_WORKING_HRS && $totalWorkingDays -lt $MAX_WORKING_DAYS ]]
+do
+        ((totalWorkingDays++))
+        empCheck=$((RANDOM%3))
+        case $empCheck in
+                $IS_FULL_TIME)
+                echo "FullTime Employee"
+                empHrs=8
+                ;;
+                $IS_PART_TIME)
+                echo "PartTime Employee"
+                empHrs=4
+                ;;
+                *)
+                echo "Employee is Absent"
+                empHrs=0;;
+		esac
+totalWorkingHrs=$(($totalWorkingHrs+$empHrs))
+
+done
+
+totalSalary=$(($totalWorkingHrs*$RATE_PER_HR ))
+echo "Employee wage per month:" $totalSalary
