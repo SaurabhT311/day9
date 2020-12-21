@@ -2,7 +2,7 @@
 randomCheck=$((RANDOM%3))
 isFullTime=1
 isPartTime=2
-salary=0
+Salary=0
 RatePerHr=20
 
 if [ $isFullTime -eq $randomCheck ]
