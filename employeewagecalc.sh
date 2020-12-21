@@ -2,8 +2,8 @@
 empCheck=$((RANDOM%3))
 isFullTime=1
 isPartTime=2
-salary=0
-ratePerHr=20
+Salary=0
+RatePerHr=20
 case $empCheck in
         $isFullTime)
         echo "FullTime Employee"
@@ -19,5 +19,5 @@ case $empCheck in
         ;;
 esac
 
-salary=$(( $ratePerHr*$empHrs ))
-echo "Employee wage:" $salary
+Salary=$(( $RatePerHr*$empHrs ))
+echo "Employee wage:" $Salary
