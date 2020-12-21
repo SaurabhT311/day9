@@ -3,7 +3,7 @@
 #CONSTANTS
 IS_FULL_TIME=1
 IS_PART_TIME=2
-salary=0
+Salary=0
 RATE_PER_HR=20
 MAX_WORK_DAYS=20;
 MAX_WORK_HRS=60;
@@ -30,7 +30,7 @@ function getWorkHrs()
 
 while [[ $TotalworkingHrs -lt $MAX_WORK_HRS && $TotalworkingDays -lt $MAX_WORK_DAYS ]]
 do
-        ((TotalworkingDays++))
+       TotalworkingDay=$((TotalworkingDays+1))
         empCheck=$((RANDOM%3))
         empHrs="$getWorkHrs $empCheck "
         TotalworkingHrs=$(( $TotalworkingHrs+$empHrs ))
