@@ -5,16 +5,18 @@
 IS_FULL_TIME=1
 IS_PART_TIME=2
 salary=0
+
 RATE_PER_HR=20
-MAX_WORKING_DAYS=20;
-MAX_WORKING_HRS=100;
+MAX_WORK_DAYS=20;
+MAX_WORK_HRS=100;
+
 #VARIABLES
-totalWorkingDays=1;
-totalWorkingHrs=0;
+TotalworkingDays=1;
+TotalworkingHrs=0;
 
-declare -A dailyWageDic
+declare -A DailyWageDic
 
-function getWorkingHrs()
+function getWorkHrs()
 {
         case $empCheck in
                 $IS_FULL_TIME)
@@ -27,18 +29,18 @@ function getWorkingHrs()
         echo $empHrs
 }
 
-while [[ $totalWorkingHrs -lt $MAX_WORKING_HRS && $totalWorkingDays -lt $MAX_WORKING_DAYS ]]
+while [[ $TotalworkingHrs -lt $MAX_WORK_HRS && $TotalworkingDays -lt $MAX_WORK_DAYS ]]
 do
-        ((totalWorkingDays++))
+        TotalWorkingDays=$((TotalworkingDays+1))
         empCheck=$((RANDOM%3))
-        empHrs="$(getWorkingHrs $empCheck)"
-        dailyWage=$(($empHrs*$RATE_PER_HR))
-        dailyWageDic["Day"$totalWorkingDays]=$dailyWage
-		totalWorkingHrs=$(( $totalWorkingHrs+$empHrs ))
+        empHrs="$(getWorkHrs $empCheck)"
+        DailyWage=$(($empHrs*$RATE_PER_HR))
+        DailyWageDic["Day"$TotalworkingDays]=$DailyWage
+		TotalworkingHrs=$(( $TotalworkingHrs+$empHrs ))
 done
 
-totalSalary=$(( $totalWorkingHrs*$RATE_PER_HR ))
+TotalSalary=$(( $TotalworkingHrs*$RATE_PER_HR ))
 
-echo "Employee wage per month:" $totalSalary
-echo "Array elements" ${dailyWageDic[@]}
-echo "Index" ${!dailyWageDic[@]}
+echo "Employee wage per month:" $TotalSalary
+echo "Array elements" ${DailyWageDic[@]}
+echo "IndexPosition" ${!DailyWageDic[@]}
