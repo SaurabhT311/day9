@@ -19,7 +19,7 @@ function getWorkingHrs()
         case $empCheck in
                 $IS_FULL_TIME)
                 empHrs=8 ;;
-				$IS_PART_TIME)
+		$IS_PART_TIME)
                 empHrs=4 ;;
                 *)
                 empHrs=0 ;;
